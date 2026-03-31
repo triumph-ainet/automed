@@ -1,0 +1,15 @@
+[Unit]
+Description=AutoMed gRPC Server
+After=network.target
+
+[Service]
+Type=simple
+User=aj
+WorkingDirectory=/home/aj/automed/server
+Environment=GRPC_PORT=50053
+ExecStart=/home/aj/automed/server/.venv/bin/python /home/aj/automed/server/grpc_server.py
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

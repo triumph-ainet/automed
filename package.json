@@ -1,0 +1,16 @@
+{
+  "name": "automed-ai-ui-stubs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generate grpc-web stubs for AI UI Constructor from server/automed.proto",
+  "scripts": {
+    "generate-stubs": "node scripts/generate_stubs.js",
+    "generate-stubs:shell": "bash server/generate_stubs.sh"
+  },
+  "devDependencies": {
+    "google-protobuf": "^3.21.2",
+    "grpc-web": "^1.4.2",
+    "protoc-gen-js": "^3.21.4-4",
+    "ts-protoc-gen": "^0.15.0"
+  }
+}

@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Python (gRPC server)
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.env.*
+
+
+# Generated / heavy artifacts (rebuild locally)
+server/model_keras/
+
+# TF.js weight shards — not tracked (match provider repo; obtain separately)
+src/model/*.bin
+
+# Secrets — never commit real daemon config (keys, RPC URLs with tokens)
+server/snetd.automed.config.json
+
+# Internal / personal onboarding notes — not for public provider repo
+*.md
+!README.md
+!server/README.md
+!ai_ui/README.md
+!src/frontend/README.md
+!server/GET_WEIGHTS.md

@@ -1,0 +1,391 @@
+/* AutoMed demo UI — MediLink / Automed.tech–inspired light clinical theme (marketplace demo) */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap");
+
+:root {
+  --am-page-top: #e3f0fb;
+  --am-page-mid: #f4f9fd;
+  --am-page-bottom: #ffffff;
+  --am-card: #ffffff;
+  --am-border: rgba(15, 23, 42, 0.07);
+  --am-text: #0f172a;
+  --am-muted: #64748b;
+  --am-accent: #1e3a5f;
+  --am-accent-soft: rgba(30, 58, 95, 0.08);
+  --am-blue-ring: #2563eb;
+  --am-ok: #15803d;
+  --am-warn: #b91c1c;
+  --am-radius: 16px;
+  --am-radius-sm: 12px;
+  --am-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 40px rgba(15, 23, 42, 0.07);
+  --am-shadow-hover: 0 16px 48px rgba(15, 23, 42, 0.09);
+  --am-font: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.am-root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  font-family: var(--am-font);
+  color: var(--am-text) !important;
+  min-height: 100%;
+  box-sizing: border-box;
+  /* Keep background simple for AI UI Constructor compatibility */
+  background: linear-gradient(180deg, var(--am-page-top) 0%, var(--am-page-mid) 28%, var(--am-page-bottom) 72%);
+}
+
+.am-root p,
+.am-root li,
+.am-root span,
+.am-root h1,
+.am-root h2 {
+  color: inherit;
+}
+
+/* ----- Hero / brand (fingerprint + title stack) ----- */
+.am-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.125rem;
+  margin-bottom: 1.5rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius);
+  background: var(--am-card);
+  box-shadow: var(--am-shadow);
+  overflow: hidden;
+}
+
+.am-hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.am-kicker {
+  margin: 0 0 0.35rem 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--am-muted) !important;
+}
+
+.am-hero-mark {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, #60a5fa 0%, #2563eb 45%, #1e40af 100%);
+  box-shadow: var(--am-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fingerprint “ridge” hint (abstract, not a copy of their asset) */
+.am-hero-mark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0.45;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, transparent 0 3px, rgba(255, 255, 255, 0.22) 3px 4px),
+    repeating-radial-gradient(circle at 48% 52%, transparent 0 5px, rgba(255, 255, 255, 0.12) 5px 6px);
+}
+
+.am-hero-mark::after {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.am-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #111827 !important;
+}
+
+.am-sub {
+  margin: 0.45rem 0 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #4b5563 !important;
+  font-weight: 400;
+}
+
+/* ----- Toolbar + cards ----- */
+.am-toolbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 720px) {
+  .am-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+.am-tool-card,
+.am-panel,
+.am-batch {
+  background: var(--am-card);
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius);
+  padding: 1.15rem 1.25rem;
+  box-shadow: var(--am-shadow);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.am-tool-card:hover,
+.am-panel:hover {
+  box-shadow: var(--am-shadow-hover);
+}
+
+.am-h2 {
+  margin: 0 0 0.7rem 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--am-text) !important;
+}
+
+.am-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.am-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 720px) {
+  .am-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.am-panel-result {
+  border-top: 3px solid var(--am-blue-ring);
+}
+
+.am-muted {
+  font-size: 0.875rem;
+  color: var(--am-muted) !important;
+  line-height: 1.55;
+  margin: 0 0 0.85rem 0;
+}
+
+/* File input — clean bordered control like dashboard forms */
+.am-file {
+  display: block;
+  width: 100%;
+  font-size: 0.8125rem;
+  margin-bottom: 0.85rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius-sm);
+  background: #fafbfc;
+  color: var(--am-text);
+  cursor: pointer;
+}
+
+.am-file::file-selector-button {
+  margin-right: 0.75rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--am-border);
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--am-font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.am-file:hover {
+  border-color: rgba(37, 99, 235, 0.35);
+  background: #fff;
+}
+
+.am-preview-wrap {
+  margin: 0.5rem 0 1rem 0;
+  border-radius: var(--am-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--am-border);
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.am-preview {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+}
+
+.am-ok {
+  font-size: 0.875rem;
+  color: var(--am-ok) !important;
+  margin: 0.4rem 0 0 0;
+  font-weight: 500;
+}
+
+.am-err {
+  font-size: 0.85rem;
+  color: var(--am-warn) !important;
+  margin: 0.35rem 0 0 0;
+}
+
+.am-err-block {
+  font-size: 0.875rem;
+  color: #7f1d1d !important;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--am-radius-sm);
+  padding: 0.65rem 0.85rem;
+  margin: 0.5rem 0 0.85rem 0;
+  line-height: 1.45;
+}
+
+.am-class-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.875rem;
+}
+
+.am-class-list li {
+  margin-bottom: 0.4rem;
+}
+
+.am-class-name {
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+
+.am-mini-ok {
+  font-size: 0.75rem;
+  color: var(--am-ok) !important;
+}
+
+.am-mini-warn {
+  font-size: 0.75rem;
+  color: #c2410c !important;
+}
+
+.am-verdict {
+  margin-top: 0.25rem;
+}
+
+.am-result-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.75rem 0;
+}
+
+.am-result-class {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--am-accent) !important;
+}
+
+.am-result-prob {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--am-text) !important;
+}
+
+.am-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+}
+
+.am-badge-ok {
+  background: #ecfdf5;
+  color: var(--am-ok) !important;
+  border: 1px solid rgba(21, 128, 61, 0.2);
+}
+
+.am-badge-bad {
+  background: #fef2f2;
+  color: var(--am-warn) !important;
+  border: 1px solid rgba(185, 28, 28, 0.2);
+}
+
+.am-disclaimer {
+  margin: 1rem 0 0 0;
+  font-size: 0.72rem !important;
+  color: var(--am-muted) !important;
+  line-height: 1.5;
+}
+
+.am-batch {
+  border-style: dashed;
+  border-color: rgba(37, 99, 235, 0.28);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.am-batch-results {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.am-batch-results .am-result-row {
+  border: 1px solid var(--am-border);
+  border-radius: var(--am-radius-sm);
+  padding: 0.7rem 0.85rem;
+  background: #f8fafc;
+}
+
+/* Buttons: primary = black pill like Automed CTAs; outlined = white card */
+.am-root button {
+  border-radius: 10px !important;
+  font-family: var(--am-font) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+}
+
+.am-root .MuiButton-contained,
+.am-root button[class*="contained"] {
+  background-color: #0f172a !important;
+  color: #fff !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12) !important;
+}
+
+.am-root .MuiButton-contained:hover,
+.am-root button[class*="contained"]:hover {
+  background-color: #1e293b !important;
+}
+
+.am-root .MuiButton-outlined,
+.am-root button[class*="outlined"] {
+  border-color: var(--am-border) !important;
+  color: var(--am-text) !important;
+  background: #fff !important;
+}
+
+.am-root .MuiButton-outlined:hover,
+.am-root button[class*="outlined"]:hover {
+  border-color: rgba(15, 23, 42, 0.2) !important;
+  background: #f8fafc !important;
+}

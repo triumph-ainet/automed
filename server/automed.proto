@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package automed;
+
+// AutoMed – counterfeit drug detection via image classification
+service AutomedService {
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse);
+  rpc Predict(PredictRequest) returns (PredictResponse);
+  rpc PredictBatch(PredictBatchRequest) returns (PredictBatchResponse);
+  rpc ListClasses(ListClassesRequest) returns (ListClassesResponse);
+}
+
+message HealthCheckRequest {}
+
+message HealthCheckResponse {
+  string status = 1;
+  string message = 2;
+}
+
+// Image as base64 (e.g. JPEG or PNG). Optional format hint.
+message PredictRequest {
+  string image_base64 = 1;
+  string image_format = 2;  // e.g. "jpeg", "png"; optional
+}
+
+// Single best class and confidence; optional is_authentic for binary use.
+message PredictResponse {
+  string class_name = 1;    // e.g. "Class 1", "authentic", "counterfeit"
+  float probability = 2;
+  bool is_authentic = 3;   // optional: true if class indicates authentic
+}
+
+// Batch: N images -> N predictions (same order).
+message PredictBatchRequest {
+  repeated PredictRequest requests = 1;
+}
+
+message PredictBatchResponse {
+  repeated PredictResponse predictions = 1;
+}
+
+// List class names (and optional is_authentic per class) from model metadata.
+message ListClassesRequest {}
+
+message ListClassesResponse {
+  repeated string class_names = 1;      // order matches model output index
+  repeated bool is_authentic = 2;       // optional; same length as class_names if set
+}
